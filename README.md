@@ -18,7 +18,7 @@ Proyecto de API Rest que permite administrar una lista de usuarios, productos y 
 
 ## Documentación
 
-Abrir el archivo openapi.yaml y copiar su contenido en [Swagger](https://editor.swagger.io/#) o importar el mismo en el editor de código.
+Abrir el archivo delilah.yaml y copiar su contenido en [Swagger](https://editor.swagger.io/#) o abrirlo en el editor de código.
 Permite acceder a los endpoints y métodos disponibles, junto con la información necesaria para hacer uso de los mismos.
 
 ## Instalar e inicializar el proyecto
@@ -47,9 +47,9 @@ Dentro de la carpeta server del repositorio, crear un archivo .env con las sigui
 
 * Abrir XAMPP y asegurarse que el puerto sobre el cual se está ejecutando es el 3306
 * Inicializar los servicios de Apache y MySQL
-* Abrir el panel de control del servicio MySQL
+* Abrir el panel de control del servicio MySQL (por ej. PHP MyAdmin)
 * Generar una nueva base de datos llamada delilah desde el panel de control, con el usuario root y sin password.
-* Abrir el archivo en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo. Se crearán las tablas necesarias, junto con dos registros en la tabla users (uno con rol de administrador y otro con rol cliente), y otros dos registros en la tabla products.
+* Abrir el archivo que se encuentra en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo. Se crearán las tablas necesarias, junto con dos registros en la tabla **users** (uno con rol de administrador y otro con rol cliente), y otros dos registros en la tabla **products**.
 
 #### 4 - Iniciar el servidor
 Abrir el archivo en /server/server.js desde node
