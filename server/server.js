@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const jwt = require("jsonwebtoken");
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize('mysql://root@localhost:3306/delilahtest');
+const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
 const auth = require("./services/auth");
 const verifyRole = auth.verifyRole;
 const verifyToken = auth.verifyToken;
