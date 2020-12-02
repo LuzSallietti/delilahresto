@@ -57,5 +57,5 @@ Abrir el archivo en /server/server.js desde node
 node server.js
 ```
 
-5 - Testeo
+## Testeo
 Testear los endpoints documentados en Swagger desde Postman para poder hacer uso de la API y base de datos generadas.
