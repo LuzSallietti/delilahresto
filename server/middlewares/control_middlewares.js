@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const jwt = require("jsonwebtoken");
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize('mysql://root@localhost:3306/delilahtest');
+const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
 
 function controlProductData (req, res, next){
     if (req.body.name && req.body.price){
