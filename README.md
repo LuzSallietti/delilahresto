@@ -39,7 +39,7 @@ Desde la consola, con el comando:
 npm install
 ```
 #### 3 - Crear variables de entorno
-En la raíz del repositorio, crear un archivo .env con las siguientes variables y sus valores:
+Dentro de la carpeta server del repositorio, crear un archivo .env con las siguientes variables y sus valores:
 * PORT = 3000
 * jtw_SEED = valor
 
@@ -49,7 +49,7 @@ En la raíz del repositorio, crear un archivo .env con las siguientes variables 
 * Inicializar los servicios de Apache y MySQL
 * Abrir el panel de control del servicio MySQL
 * Generar una nueva base de datos llamada delilah desde el panel de control, con el usuario root y sin password.
-* Abrir el archivo en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo.
+* Abrir el archivo en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo. Se crearán las tablas necesarias, junto con dos registros en la tabla users (uno con rol de administrador y otro con rol cliente), y otros dos registros en la tabla products.
 
 #### 4 - Iniciar el servidor
 Abrir el archivo en /server/server.js desde node
