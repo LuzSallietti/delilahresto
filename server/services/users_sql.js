@@ -5,7 +5,7 @@ dotenv.config();
 const jwt = require("jsonwebtoken");
 const Sequelize = require("sequelize");
 const { updateOrder } = require("./orders_sql");
-const sequelize = new Sequelize('mysql://root@localhost:3306/delilahtest');
+const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
 
 async function registerUser(req, res) {
     let values = [req.body.user, req.body.name, req.body.email, req.body.address, req.body.password, req.body.phone, "customer"];
