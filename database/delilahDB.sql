@@ -14,7 +14,7 @@ CREATE TABLE `orders` (
     `status` VARCHAR (10) NOT NULL,
     `time` TIME NOT NULL,   
     `paymentMTD` VARCHAR(15) NOT NULL,
-    `total` DOUBLE (5,2) NOT NULL,
+    `total` DOUBLE (10,2) NOT NULL,
     `userID` INT (11) NOT NULL      
 ); 
 ALTER TABLE `orders` ADD FOREIGN KEY (userID) REFERENCES users(id);
@@ -30,7 +30,7 @@ ALTER TABLE `products_x_order` ADD FOREIGN KEY (order_number) REFERENCES orders(
 CREATE TABLE `products`(
     `id` INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
-    `price` DOUBLE(5, 2) NOT NULL, 
+    `price` DOUBLE(10,2) NOT NULL, 
     `image` VARCHAR(320) 
 );
 ALTER TABLE `products_x_order` ADD FOREIGN KEY (prod_id) REFERENCES products(id);
