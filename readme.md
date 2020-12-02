@@ -38,20 +38,24 @@ Desde la consola, con el comando:
 ```bash
 npm install
 ```
+#### 3 - Crear variables de entorno
+En la raíz del repositorio, crear un archivo .env con las siguientes variables y sus valores:
+* PORT = 3000
+* jtw_SEED = valor
 
-#### 3 - Crear la base de datos
+#### 4 - Crear la base de datos
 
 * Abrir XAMPP y asegurarse que el puerto sobre el cual se está ejecutando es el 3306
 * Inicializar los servicios de Apache y MySQL
 * Abrir el panel de control del servicio MySQL
-* Generar una nueva base de datos llamada delilah_resto desde el panel de control
-* Abrir el archivo en /database/queries.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo.
+* Generar una nueva base de datos llamada delilah desde el panel de control
+* Abrir el archivo en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo.
 
-#### 4 - Iniciando el servidor
+#### 4 - Iniciar el servidor
 Abrir el archivo en /server/server.js desde node
 ```bash
-node server
+node server.js
 ```
 
-5 - Listo para usar!
-Testear los endpoints provistos desde Postman para poder hacer uso de la API y base de datos generadas
+5 - Testeo
+Testear los endpoints documentados en Swagger desde Postman para poder hacer uso de la API y base de datos generadas.

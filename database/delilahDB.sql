@@ -35,35 +35,15 @@ CREATE TABLE `products`(
     `id` INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
     `price` DOUBLE(5, 2) NOT NULL, 
-    `image` VARCHAR(100) -- definir
+    `image` VARCHAR(320) 
 )
 
+-- Crear un usuario admin
+INSERT INTO `users` (user, name , email, address , password, phone, role) VALUES ("admin", "Luz Sallietti", "luz@mail.com", "Bv. Los Talas 3456", "delilahadmin", "+5493512258963", "admin");
 
+-- Crear un usuario cliente
+INSERT INTO `users` (user, name , email, address , password, phone, role) VALUES ("lolacatala", "Lola Catalá", "lola@mail.com", "Psj. Córdoba 124", "lola2020", "+5493518954214", "customer");
 
--- PRODUCTS
--- Cliente y admin--> RETRIEVE a todos los productos
-SELECT * FROM `products`;
-
--- Admin --> CREATE nuevo producto
+-- Crear nuevo producto
 INSERT INTO `products` (name, price) VALUES ("Chocotorta", 389);
 INSERT INTO `products` (name, price) VALUES ("Lemon Pie", 475);
-INSERT INTO `products` (name, price) VALUES ("Strawberry Pavlova", 650);
-
---Admin --> UPDATE producto
-UPDATE `products` SET name ="Pavlova de Frutos Rojos" WHERE name = "Strawberry Pavlova";
-UPDATE `products` SET `name` ="Summer Lemon Cake",`price`= 525 WHERE id = 3;
-
---Admin --> DELETE producto
-DELETE FROM `products` WHERE id = 1; --borra Chocotorta
-
-
--- OK!
-SELECT orders.number, orders.status, orders.time, orders.paymentMTD, orders.total, users.name , users.address, users.phone, products_x_order.qty, products.name, products_x_order.total FROM orders INNER JOIN users ON users.id = orders.userID 
-INNER JOIN products_x_order ON products_x_order.order_number = orders.number
-INNER JOIN products ON products.id = products_x_order.prod_id
-
---Desglose
-SELECT orders.number, orders.status, orders.time, orders.paymentMTD, orders.total, users.name , users.address, users.phone FROM orders INNER JOIN users ON users.id = orders.userID
-
-
-
