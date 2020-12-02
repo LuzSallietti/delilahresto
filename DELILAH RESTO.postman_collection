@@ -1,0 +1,629 @@
+{
+	"info": {
+		"_postman_id": "0b087ec4-9ac0-4374-8e11-80afcc80ec04",
+		"name": "Proyecto 3 - DELILAH RESTO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Productos / POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cinammon Roll\",\r\n    \"price\": 325 \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos GET",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoianVhbmNhdCIsImVtYWlsIjoianVhbm5AbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDU5MTU1MjIsImV4cCI6MTYwNjAwMTkyMn0.sZonK25mxKxMdJO7f_ZZwIdmRkaApkf2dMoCte8LEJQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/v1/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos PUT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Blueberries Cake\", \r\n    \"price\": 155 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/productos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"productos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/v1/productos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"productos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registro POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"lauragola\",\r\n    \"name\": \"María Laura Gola\",\r\n    \"email\": \"lgola@mail.com\",\r\n    \"address\": \"Lope de Vega 3245\",\r\n    \"password\": \"mlgola2020\",\r\n    \"phone\": \"3512257590\"        \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/registro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identifier\":\"admin\",\r\n    \"password\": \"delilahadmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "luzsallietti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cart\":[\r\n        {\r\n            \"id\": 1,\r\n            \"qty\": 2,\r\n            \"price\":389\r\n        },\r\n         {\r\n            \"id\": 2,\r\n            \"qty\": 1,\r\n            \"price\": 475\r\n        }         \r\n    ],\r\n    \"paymentMTD\": \"Efectivo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos PUT por nroOrden",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\":\"confirmado\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos GET por idUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos/usuario/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos",
+						"usuario",
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "luzsallietti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos GET por idProducto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/v1/productos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"productos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos GET por nroOrden",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "luzsallietti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos GET Cliente por nroOrden",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos/cliente/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos",
+						"cliente",
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "luzsallietti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios GET (admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/usuarios",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios GET usuario por idUsuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/usuarios/usuario/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"usuarios",
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios UPDATE por idUsuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lola Delfina Catalá\",\r\n    \"address\": \"Contardo Ferrini 10\",\r\n    \"password\": \"lola2020\",\r\n    \"phone\": \"+5493512258963\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/v1/usuarios/usuario/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"usuarios",
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,745 @@
+openapi: 3.0.0
+info:
+  title: Delilah Resto
+  description: "API para realización y administración de pedidos de comida de Delilah Resto. Las personas usuarias con rol de clientes pueden registrarse y loguearse, consultar productos, crear nuevos pedidos, consultar pedidos anteriores y acceder a su información de registro. Quienes tienen rol de administrador pueden crear nuevos productos, actualizarlos, eliminarlos, acceder a todos los pedidos y actualizarlos, y acceder a la información de usuarios registrados."
+  version: "1.0"
+servers:
+  - url: http://localhost:3000/v1
+paths:
+  /registro:
+    post:
+      tags:
+      - "clientes"
+      summary: "Crear nuevo usuario con rol cliente"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: "Operación exitosa. Devuelve el id de registro del nuevo usuario" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "User succesfully created"
+                  id:
+                    type: integer
+                    format: int64
+                    example: 14
+        "405":
+          description: "Malformed request. One or more parameters missing"
+        "409":
+          description: "Username or email already registered"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /login:
+    post:
+      tags:
+      - "clientes"
+      - "administrador"
+      summary: "Ingreso al sistema"
+      description: "El request debe contenener un objeto compuesto por: identificador (email o usuario registrado) y contraseña)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: "Operación exitosa. Devuelve un objeto con datos del usuario y con token necesario para la autenticación en servicios" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: "integer"
+                    format : int64
+                    example: 3
+                  user:
+                    type: "string"
+                    example: "lolacat"
+                  email:
+                    type: "string"
+                    example: "lola@mail.com"
+                  role:
+                    type: "string"
+                    example: "customer"
+                  jtw:
+                    type: "string"
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlciI6Imp1YW5jYXQiLCJlbWFpbCI6Imp1YW5uQG1haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjA2NDMyOTAzLCJleHAiOjE2MDY1MTkzMDN9.fcPzFZDuVDt0gTxpilswwfQB-H_uneFlb773tK1a4Ns"
+        "401":
+          description: "Incorrect username or password"
+        "404":
+          description: "Not registered user"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /productos:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      - "administrador"
+      summary: "Listar o leer todos los productos disponibles"
+      description: ""
+      responses:
+        "200":
+          description: "Operación exitosa. Devuelve un array de objetos, cada uno representa un producto de la base de datos."
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items: 
+                  $ref: "#/components/schemas/GetProduct"
+        "401":
+          description: "Unauthorized action"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    example: "JsonWebTokenError"
+                  message:
+                    type: "string"
+                    example: "invalid token"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Crear un nuevo producto"
+      description: "El request debe contener un objeto con las propiedades correspondientes al producto. La propiedad image es opcional."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: "Operación exitosa"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Product succesfully created"
+                  id:
+                    type: integer
+                    format: int64
+                    example: 5
+        "400":
+          description: "Malformed request. One or more parameters missing"
+        "401":
+          description: "Unauthorized action"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /productos/{id}:
+    put:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Actualizar un producto por su ID"
+      parameters:
+      - in: path
+        name: id   
+        required: true
+        schema:
+          type: integer
+        description: "valor id válido del producto a actualizar"
+      requestBody:
+        required: true
+        description: "El request debe contener un objeto con las propiedades correspondientes al producto. La propiedad image es opcional."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: "Product succesfully updated"
+        "400":
+          description: "Invalid parameter on request // Malformed request. One or more parameters missing"
+        "401":
+          description: "Unauthorized action"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Eliminar un producto"
+      description: "Solo utilizable cuando el producto no se encuentra ya asociado a pedidos/órdenes almacenados en la base de datos (error de restricción de clave foránea)"
+      parameters:
+      - in: path
+        name: id   
+        required: true
+        schema:
+          type: integer
+        description: "valor id válido del producto a actualizar"
+      responses:
+        "200":
+          description: "Product succesfully deleted"
+        "400":
+          description: "Invalid parameter on request"
+        "401":
+          description: "Unauthorized action"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      - "clientes"
+      summary: "Obtener detalles de un producto por su ID"
+      parameters:
+      - in: path
+        name: id   
+        required: true
+        schema:
+          type: integer
+        description: "valor id válido del producto a consultar"
+      responses:
+        "200":
+          description: "Operación exitosa. Devuelve un objeto con detalles del producto"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProduct'
+        "400":
+          description: "Invalid parameter on request"
+        "401":
+          description: "Unauthorized action"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /pedidos:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Listar o leer todos los pedidos"
+      description: ""
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto por cada orden/pedido registrado"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      summary: "Crear un nuevo pedido"
+      description: "Objeto requerido para a creación de un nuevo pedido"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrder"
+      responses:
+        "200":
+          description: "Operación exitosa"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Order succesfully created"
+                  order_number:
+                    type: integer
+                    format: int64
+                    example: 5
+                  order_total:
+                    type: number
+                    format: double
+                    example: 795
+                  items_added:
+                    type: integer
+                    format: int64
+                    example: 2
+        "400":
+          description: "Malformed request. One or more parameters missing"
+        "401":
+          description: "Unauthorized action"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /pedidos/{nroOrden}:
+    put:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Actualizar status y hora en un pedido"
+      description: "Objeto con datos de actualización del pedido"
+      parameters:
+      - in: path
+        name: nroOrden   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del número de pedido u orden a actualizar"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOrder"
+      responses:
+        "200":
+          description: "Order succesfully updated"
+        "500":
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+        "401":
+          description: "Unauthorized action"
+        "400":
+          description: "Invalid parameter on request // Malformed request"
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Listar un pedido por su número de orden"
+      description: ""
+      parameters:
+      - in: path
+        name: nroOrden   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del número de pedido u orden a consultar"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto con el detalle de la orden correspondiente"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: "Invalid parameter on request"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /pedidos/usuario/{idUsuario}:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      summary: "Listar todos los pedidos correspondientes al usuario"
+      description: ""
+      parameters:
+      - in: path
+        name: idUsuario   
+        required: true
+        schema:
+          type: integer
+        description: "valor id válido del usuario que realiza la consulta"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto por cada orden/pedido registrado con el id de usuario"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: "Invalid parameter on request"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /pedidos/cliente/{nroOrden}:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      summary: "Listar el detalle de una orden, correspondiente al usuario"
+      description: ""
+      parameters:
+      - in: path
+        name: nroOrden   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del número de pedido u orden a consultar"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto con el detalle de la orden/pedido"
+          content:
+            application/json:
+              schema: 
+                  $ref: "#/components/schemas/Order"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /usuarios:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Listar o leer todos los usuarios registrados"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un array de objetos con el detalle de cada usuario"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items: 
+                  $ref: "#/components/schemas/GetUser"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+  /usuarios/usuario/{idUsuario}:
+    get:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      - "administrador"
+      summary: "Leer o acceder a la información de usuario propia"
+      parameters:
+      - in: path
+        name: idUsuario   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del id de usuario logueado"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto con el detalle del usuario"
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/User"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      security:
+        - authorization: []
+      tags:
+      - "clientes"
+      - "administrador"
+      summary: "Actualizar la información de usuario propia"
+      parameters:
+      - in: path
+        name: idUsuario   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del id de usuario logueado"
+      requestBody:
+        required: true
+        description: "El request debe contener un objeto con las propiedades actualizables del usuario"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUser"
+      responses:
+        '200':
+          description: "Operación exitosa. Devuelve un objeto con el detalle del usuario actualizado"
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/User"
+        '400':
+          description: "Malformed request. One or more parameters missing"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
+    
+components:
+  securitySchemes:
+    authorization:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  schemas:
+    User:
+      type: "object"
+      properties:
+        user:
+          type: "string"
+          example: "juancat"
+        name:
+          type: "string"
+          example: "Juan Catalano"
+        email:
+          type: "string"
+          example: "juancatalano@mail.com"
+        address:
+          type: "string"
+          example: "Bv. Los Andres 2517"
+        password:
+          type: "string"
+          example: "catalanoj25072020"
+        phone:
+          type: "string"
+          example: "+5493512257896"
+    GetUser:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 89
+        user:
+          type: "string"
+          example: "juancat"
+        name:
+          type: "string"
+          example: "Juan Catalano"
+        email:
+          type: "string"
+          example: "juancatalano@mail.com"
+        address:
+          type: "string"
+          example: "Bv. Los Andres 2517"
+        phone:
+          type: "string"
+          example: "+5493512257896"
+    UpdateUser:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Juan Catalano"
+        address:
+          type: "string"
+          example: "Bv. Los Andres 2517"
+        password:
+          type: "string"
+          example: "jc19762508"
+        phone:
+          type: "string"
+          example: "+5493512258963"
+    Login:
+      type: "object"
+      required:
+      - "identifier"
+      - "password"
+      properties:
+        identifier:
+          type: "string"
+          example: "lolacatala@mail.com"
+        password:
+          type: "string"
+          example: "lola2020"
+    GetProduct:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        name:
+          type: "string"
+          example: "Always Green Salad"
+        price:
+          type: "number"
+          format: "double"
+          example: 375
+        image:
+          type: "string"
+          example: "https://pixy.org/src/13/thumbs350/135111.jpg"
+    Product:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Always Green Salad"
+        price:
+          type: "number"
+          format: "double"
+          example: 375
+        image:
+          type: "string"
+          example: "https://pixy.org/src/13/thumbs350/135111.jpg"
+    Order:
+      type: "object"
+      properties:
+        order_detail:
+          type: "object"
+          properties:
+            number:
+              type: "integer"
+              format: "int64"
+              example: 12
+            status:
+              type: "string"
+              example: "new"
+            time:
+              type: "string"
+              format: "time-hour-minute"
+              example: "19:32"
+            paymentMTD:
+              type: "string"
+              enum:
+              - "efectivo"
+              - "debito"
+              - "credito"
+            total:
+              type: "number"
+              format: "double"
+              example: 750
+            name:
+              type: "string"
+              example: "Juan Catalano"
+            address:
+              type: "string"
+              example: "Bv. Los Andres 2517"
+            phone:
+              type: "string"
+              example: "+5493512257896"
+        cart:
+          type: "array"
+          items:
+            properties:
+              prod_id:
+                type: "integer"
+                format: "int64"
+                example: 7
+              qty:
+                type: "integer"
+                format: "int64"
+                example: 2
+              total:
+                type: "number"
+                format: "double"
+                example: 750
+              name:
+                type: "string"
+                example: "Always Green Salad"
+    CreateOrder:
+      type: "object"
+      properties:
+        cart:
+          type: "array"
+          items:
+            properties:
+              id:
+                type: "integer"
+                format: "int64"
+                example: 54
+              qty:
+                type: "integer"
+                format: "int64"
+                example: 1
+              price:
+                type: "number"
+                format: "double"
+                example: 225
+        paymentMTD:
+          type: "string"
+          enum:
+          - "efectivo"
+          - "debito"
+          - "credito"
+    UpdateOrder:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+          enum:
+          - "confirmado"
+          - "preparando"
+          - "enviando"
+          - "entregado"
+          - "cancelado"
