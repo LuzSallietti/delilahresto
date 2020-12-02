@@ -4,7 +4,7 @@
     dotenv.config();
     
     const Sequelize = require("sequelize");
-    const sequelize = new Sequelize('mysql://root@localhost:3306/delilahtest');
+    const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
 
 
     async function getAllOrders(req, res){
