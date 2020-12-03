@@ -403,7 +403,7 @@ paths:
         required: true
         schema:
           type: integer
-        description: "valor válido del número de pedido u orden a consultar"
+        description: "valor válido del número de pedido u orden a eliminar"
       responses:
         '200':
           description: "Order succesfully deleted"
