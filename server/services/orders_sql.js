@@ -1,12 +1,18 @@
     const express = require("express");
     const server = new express();
     const dotenv = require("dotenv");
-    dotenv.config();
-    
+    dotenv.config();    
+    const db_config = require('../config');
     const Sequelize = require("sequelize");
-    const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
-
-
+    const sequelize = new Sequelize( db_config.conf_db_name, db_config.conf_user, db_config.conf_password, { 
+        host: db_config.conf_db_host,
+        dialect: 'mysql',
+        port: db_config.conf_port,
+        dialectOptions: {
+            multipleStatements: true
+        }
+    });
+    
     async function getAllOrders(req, res){
 
     let results = [];
@@ -236,3 +242,19 @@ async function getCustomerOrderDetail(req, res){
     }
 }
 module.exports.getCustomerOrderDetail = getCustomerOrderDetail;
+
+async function deleteOrder (req, res){
+    let values = [req.params.nroOrden];
+    let statement = "DELETE FROM orders WHERE number = ?";
+    let options = { replacements: [values] };
+    try {
+        let response = await sequelize.query(statement, options);
+        if(response[0].affectedRows === 1){
+            res.status(200).json("Order succesfully deleted");
+        }
+        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+module.exports.deleteOrder = deleteOrder;

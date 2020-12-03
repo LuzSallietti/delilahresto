@@ -390,6 +390,33 @@ paths:
             application/json:
               schema:
                 type: object
+    delete:
+      security:
+        - authorization: []
+      tags:
+      - "administrador"
+      summary: "Eliminar un pedido por su número de orden"
+      description: ""
+      parameters:
+      - in: path
+        name: nroOrden   
+        required: true
+        schema:
+          type: integer
+        description: "valor válido del número de pedido u orden a consultar"
+      responses:
+        '200':
+          description: "Order succesfully deleted"
+        '400':
+          description: "Invalid parameter on request"
+        '401':
+          description: "Unauthorized action"
+        '500':
+          description: "Server or database error description"
+          content:
+            application/json:
+              schema:
+                type: object
   /pedidos/usuario/{idUsuario}:
     get:
       security:

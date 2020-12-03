@@ -42,13 +42,14 @@ npm install
 Dentro de la carpeta server del repositorio, crear un archivo .env con las siguientes variables y sus valores:
 * PORT = 3000
 * jtw_SEED = valor
+* DB_pass = valor
 
 #### 4 - Crear la base de datos
 
 * Abrir XAMPP y asegurarse que el puerto sobre el cual se está ejecutando es el 3306
 * Inicializar los servicios de Apache y MySQL
 * Abrir el panel de control del servicio MySQL (por ej. PHP MyAdmin)
-* Generar una nueva base de datos llamada delilah desde el panel de control, con el usuario root y sin password.
+* Generar una nueva base de datos llamada delilah desde el panel de control, con el usuario root y asignarle como password el valor que hayas asignado a la variable de entorno DB_pass (en el archivo .env antes creado). 
 * Abrir el archivo que se encuentra en /database/delilahDB.sql y dentro del panel de control de la base de datos ejecutar la serie de queries del archivo o importar el mismo. Se crearán las tablas necesarias, junto con dos registros en la tabla **users** (uno con rol de administrador y otro con rol cliente), y otros dos registros en la tabla **products**.
 
 #### 4 - Iniciar el servidor

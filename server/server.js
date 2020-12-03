@@ -3,8 +3,17 @@ const server = new express();
 const dotenv = require("dotenv");
 dotenv.config();
 const jwt = require("jsonwebtoken");
+const db_config = require('./config');
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize('mysql://root@localhost:3306/delilah');
+const sequelize = new Sequelize( db_config.conf_db_name, db_config.conf_user, db_config.conf_password, { 
+    host: db_config.conf_db_host,
+    dialect: 'mysql',
+    port: db_config.conf_port,
+    dialectOptions: {
+        multipleStatements: true
+    }
+});
+
 const auth = require("./services/auth");
 const verifyRole = auth.verifyRole;
 const verifyToken = auth.verifyToken;
@@ -93,7 +102,10 @@ server.get("/v1/pedidos/usuario/:idUsuario", verifyToken, verifyID, (req, res) =
     orders_sql.getCustomerOrders(req, res);
 })
 server.get("/v1/pedidos/:nroOrden", verifyToken, verifyRole, checkOrder, (req, res) => {
-    orders_sql.getOrderDetail(req, res); //ok
+    orders_sql.getOrderDetail(req, res); 
+})
+server.delete("/v1/pedidos/:nroOrden", verifyToken, verifyRole, checkOrder, (req, res) => {
+    orders_sql.deleteOrder(req, res);
 })
 server.get("/v1/pedidos/cliente/:nroOrden", verifyToken, (req, res) => {
     orders_sql.getCustomerOrderDetail(req, res);
@@ -113,3 +125,4 @@ server.put("/v1/pedidos/:nroOrden", verifyToken, verifyRole, checkOrder, checkBo
 server.listen(process.env.PORT, () => {
     console.log("Listening en puerto " + process.env.PORT);
 })
+

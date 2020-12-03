@@ -55,7 +55,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5NTQyMDQsImV4cCI6MTYwNzA0MDYwNH0.XXTq_z2s035IMrYzqspTjxeBxAGOG5EfQDY1we7Suts",
 							"type": "string"
 						}
 					]
@@ -224,7 +224,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5Mzk1NDUsImV4cCI6MTYwNzAyNTk0NX0.s1oqLZFupL-4rdl9z7RzdSqP-qOR8yj4Ki0Tt3vl4_o",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5NTQyMDQsImV4cCI6MTYwNzA0MDYwNH0.XXTq_z2s035IMrYzqspTjxeBxAGOG5EfQDY1we7Suts",
 							"type": "string"
 						}
 					]
@@ -270,7 +270,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlciI6ImxvbGFjYXRhbGEiLCJlbWFpbCI6ImxvbGFAbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2MDY5Mzc3MTcsImV4cCI6MTYwNzAyNDExN30.echXAldubmhN9WLCQ9g3gGRGJQXDgLsysjO_2W67gzU",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5NDE1OTYsImV4cCI6MTYwNzAyNzk5Nn0.By7oo208ewrhnv-myUmPhxloT_qo-Hnvxp8TwGOAUAw",
 							"type": "string"
 						}
 					]
@@ -279,7 +279,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cart\":[\r\n        {\r\n            \"id\": 1,\r\n            \"qty\": 2,\r\n            \"price\":389\r\n        },\r\n         {\r\n            \"id\": 2,\r\n            \"qty\": 1,\r\n            \"price\": 475\r\n        }         \r\n    ],\r\n    \"paymentMTD\": \"Efectivo\"\r\n}",
+					"raw": "{\r\n    \"cart\":[\r\n        {\r\n            \"id\": 1,\r\n            \"qty\": 1,\r\n            \"price\":389\r\n        },\r\n         {\r\n            \"id\": 2,\r\n            \"qty\": 2,\r\n            \"price\": 475\r\n        }         \r\n    ],\r\n    \"paymentMTD\": \"Efectivo\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -619,6 +619,37 @@
 						"usuarios",
 						"usuario",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos DELETE por nroOrden",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlciI6ImFkbWluIiwiZW1haWwiOiJsdXpAbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MDY5NDY4OTUsImV4cCI6MTYwNzAzMzI5NX0.XeFZ8qBAg9wSkwddA1uUKrCHBnGF2oMqKd-2XA2PAtE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/v1/pedidos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"pedidos",
+						"1"
 					]
 				}
 			},

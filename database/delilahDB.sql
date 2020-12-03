@@ -26,7 +26,7 @@ CREATE TABLE `products_x_order`(
 );
 ALTER TABLE `products_x_order`ADD `total` DOUBLE(5,2);
 ALTER TABLE `products_x_order`ADD `prod_price` DOUBLE(5,2);
-ALTER TABLE `products_x_order` ADD FOREIGN KEY (order_number) REFERENCES orders(number);
+ALTER TABLE `products_x_order` ADD FOREIGN KEY (order_number) REFERENCES orders(number) ON DELETE CASCADE;
 CREATE TABLE `products`(
     `id` INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
